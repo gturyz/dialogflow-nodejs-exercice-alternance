@@ -34,7 +34,6 @@ export default {
       });
 
       this.$axios.get(`http://localhost:3000/send/${this.message}`).then( res => {
-        // console.log(res);
         this.messages.push({
           text: res.data,
           auteur: 'server'

@@ -11,8 +11,6 @@ app.use(cors())
 
 app.get('/send/:message', async (req, res) => {
   // A unique identifier for the given session
-  // console.log(req.params)
-  // console.log(res)
   const sessionId = uuid.v4();
 
   // Create a new session
@@ -34,14 +32,8 @@ app.get('/send/:message', async (req, res) => {
 
   // Send request and log result
   const responses = await sessionClient.detectIntent(request);
-  console.log('Detected intent');
+
   const result = responses[0].queryResult;
-  // console.log(`  Query: ${result.queryText}`);
-  // console.log(`  Response: ${result.fulfillmentText}`);
-  // if (result.intent) {
-  //   console.log(`  Intent: ${result.intent.displayName}`);
-  // } else {
-  //   console.log(`  No intent matched.`);
   // }
   res.send(result.fulfillmentText)
 })
