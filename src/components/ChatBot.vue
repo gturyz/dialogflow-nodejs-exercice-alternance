@@ -4,7 +4,7 @@
       <ul class="list">
         <li class="message" v-for="(message, index) in messages" :key="index" :class="message.auteur">
            <p>
-             <span>{{ message.text }}</span>
+             <span>{{ message.auteur }} : {{ message.text }}</span>
           </p>
         </li>
       </ul>
@@ -32,6 +32,14 @@ export default {
         text: this.message,
         auteur: 'client'
       });
+
+      this.$axios.get(`http://localhost:3000/send/${this.message}`).then( res => {
+        // console.log(res);
+        this.messages.push({
+          text: res.data,
+          auteur: 'server'
+        })
+      })
 
     }
   }
