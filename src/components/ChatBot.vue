@@ -28,18 +28,20 @@ export default {
   }),
   methods: {
     envoyerMessage() {
-      this.messages.push({
-        text: this.message,
-        auteur: 'client'
-      });
-
-      this.$axios.get(`http://localhost:3000/send/${this.message}`).then( res => {
+      if (this.message != ''){
         this.messages.push({
-          text: res.data,
-          auteur: 'server'
-        })
-      })
+          text: this.message,
+          auteur: 'client'
+        });
 
+        this.$axios.get(`http://localhost:3000/send/${this.message}`).then( res => {
+          this.messages.push({
+            text: res.data,
+            auteur: 'server'
+          })
+        })
+      }
+      this.message = ''
     }
   }
 }
